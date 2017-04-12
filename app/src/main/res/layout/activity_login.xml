@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.teamwinnner.android.blog.LoginActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="74dp"
+        android:id="@+id/loginEmailField"
+        android:hint="email" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_below="@+id/loginEmailField"
+        android:layout_alignStart="@+id/loginEmailField"
+        android:layout_marginTop="33dp"
+        android:id="@+id/loginPasswordEmailField" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginBtn"
+        android:layout_below="@+id/loginPasswordEmailField"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp" />
+
+    <TextView
+        android:text="New User"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginBtn"
+        android:layout_alignEnd="@+id/loginPasswordEmailField"
+        android:layout_marginEnd="65dp"
+        android:layout_marginTop="69dp"
+        android:id="@+id/TxtnewUser" />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginBtn"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/googlebtn">
+        android:layout_below="@+id/loginBtn"
+
+    </com.google.android.gms.common.SignInButton>
+</RelativeLayout>
