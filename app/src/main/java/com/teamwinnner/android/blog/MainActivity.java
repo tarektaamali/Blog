@@ -51,10 +51,10 @@ private RecyclerView mbloglist;
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Blog");
 
 
-        String CurrentUserId=mAuth.getCurrentUser().getUid();
+       // String CurrentUserId=mAuth.getCurrentUser().getUid();
         mDatabaseCurrentUsre= FirebaseDatabase.getInstance().getReference().
                 child("Blog");
-        mQueryCurrent=mDatabaseCurrentUsre.orderByChild("uid").equalTo(CurrentUserId);
+        //mQueryCurrent=mDatabaseCurrentUsre.orderByChild("uid").equalTo(CurrentUserId);
         mDatabaseUsers= FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseLike= FirebaseDatabase.getInstance().getReference().child("Likes");
 
