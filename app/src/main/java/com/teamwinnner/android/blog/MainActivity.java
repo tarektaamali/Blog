@@ -2,6 +2,7 @@ package com.teamwinnner.android.blog;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -183,9 +184,10 @@ View mView ; TextView post_title;
              @Override
              public void onDataChange(DataSnapshot dataSnapshot) {
             if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
-              mlikebtn.setImageResource(R.drawable.ic_thumb_up_black_24dp);
+              mlikebtn.setImageResource(R.drawable.ic_thumb_up_white_24dp);
+
             }else {
-                mlikebtn.setImageResource(R.drawable.ic_red);
+                mlikebtn.setImageResource(R.drawable.ic_thumb_up_black_24dp);
             }
 
 
@@ -231,6 +233,7 @@ if (item.getItemId() == R.id.action_add){
         else if(item.getItemId() ==  log){
     logout();
         }
+
         return super.onOptionsItemSelected(item);
     }
 

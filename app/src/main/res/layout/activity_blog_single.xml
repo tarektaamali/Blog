@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.teamwinnner.android.blog.BlogSingleActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -46,5 +53,5 @@
             android:visibility="invisible" />
 
     </LinearLayout>
-
+    </ScrollView>
 </RelativeLayout>

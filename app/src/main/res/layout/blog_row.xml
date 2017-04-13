@@ -44,14 +44,17 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_thumb_up_black_24dp"
                 android:id="@+id/mlikebtn"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@null"
+                />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_thumb_down_black_24dp"
                 android:id="@+id/mdislikebtn"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@null"/>
         </LinearLayout>
 
 

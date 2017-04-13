@@ -25,7 +25,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SetupActivity" />
         <activity android:name=".BlogSingleActivity" />
-
+        <activity android:name=".Main2Activity"></activity>
     </application>
 
 </manifest>
