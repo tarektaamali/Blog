@@ -2,37 +2,52 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+    android:layout_margin="10dp"
+    android:padding="30dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<ImageView
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_title"
+                android:text="android"
+                  android:textStyle="bold"
+                android:padding="20dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_username"
+                android:padding="15dp"
+                android:text="username"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ImageView
+    android:layout_marginTop="10dp"
+    android:paddingTop="8dp"
     android:layout_width="match_parent"
     android:layout_height="274dp"
     android:id="@+id/post_image"
     android:src="@mipmap/add_btn"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_title"
-            android:text="android"
-              android:textStyle="bold"
-            android:padding="20dp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/post_desc"
             android:padding="20dp"
-            android:text="android"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_username"
-            android:padding="15dp"
-            android:text="username"/>
+            android:text="android"
+            android:inputType="textMultiLine"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -46,6 +61,7 @@
                 android:id="@+id/mlikebtn"
                 android:layout_weight="1"
                 android:background="@null"
+
                 />
 
             <ImageButton
@@ -55,8 +71,33 @@
                 android:id="@+id/mdislikebtn"
                 android:layout_weight="1"
                 android:background="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombrelike"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textdislike"
+                android:layout_weight="1" />
         </LinearLayout>
 
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

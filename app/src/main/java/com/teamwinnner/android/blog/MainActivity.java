@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
+import static android.R.attr.x;
 import static com.teamwinnner.android.blog.R.id.log;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,11 +38,13 @@ private RecyclerView mbloglist;
     private DatabaseReference mdatabase;
     private DatabaseReference mDatabaseUsers;
     private DatabaseReference mDatabaseLike;
+    private DatabaseReference mDatabasedisLike;
     public boolean mProcessLike =false;
+    public boolean mProcessLike1 =false;
     private DatabaseReference mDatabaseCurrentUsre;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private Query mQueryCurrent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ private RecyclerView mbloglist;
         //mQueryCurrent=mDatabaseCurrentUsre.orderByChild("uid").equalTo(CurrentUserId);
         mDatabaseUsers= FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseLike= FirebaseDatabase.getInstance().getReference().child("Likes");
+        mDatabasedisLike= FirebaseDatabase.getInstance().getReference().child("dislike");
 
         mDatabaseUsers.keepSynced(true);
         mdatabase.keepSynced(true);
@@ -84,12 +88,14 @@ private RecyclerView mbloglist;
             @Override
             protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
               final String post_key=getRef(position).getKey();
-
+                final String post_key1=getRef(position).getKey();
                  viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(),model.getImage());
                 viewHolder.setUsername(model.getUsername());
+                viewHolder.setdislikebtn(post_key1);
                 viewHolder.setlikebtn(post_key);
+                ;
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -109,12 +115,14 @@ mDatabaseLike.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         if (mProcessLike) {
-            if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
-                mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+            if (dataSnapshot.child("1").child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+                mDatabaseLike.child("1").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
                 mProcessLike = false;
 
             } else {
-                mDatabaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random Value");
+                mDatabaseLike.child("1").child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random Value");
+                mDatabaseLike.child("2").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+
                 mProcessLike = false;
             }
         }
@@ -125,10 +133,58 @@ mDatabaseLike.addValueEventListener(new ValueEventListener() {
     }
 });
 
+
+
+
+
+
                     }
                 });
+viewHolder.mdislikebtn1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        mProcessLike1=true;
+        mDatabaseLike.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (mProcessLike1) {
+                    if (dataSnapshot.child("2").child(post_key1).hasChild(mAuth.getCurrentUser().getUid())) {
+                        mDatabaseLike.child("2").child(post_key1).child(mAuth.getCurrentUser().getUid()).removeValue();
+                        mProcessLike1 = false;
+
+                    } else {
+                        mDatabaseLike.child("2").child(post_key1).child(mAuth.getCurrentUser().getUid()).setValue("Random Value");
+                        mDatabaseLike.child("1").child(post_key1).child(mAuth.getCurrentUser().getUid()).removeValue();
+
+                        mProcessLike1 = false;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
             }
         };
+
+
+
 
 mbloglist.setAdapter(firebaseRecyclerAdapter);
 
@@ -159,18 +215,28 @@ mbloglist.setAdapter(firebaseRecyclerAdapter);
  public static class BlogViewHolder extends RecyclerView.ViewHolder{
 View mView ; TextView post_title;
      ImageButton mlikebtn ;
+     ImageButton mdislikebtn1 ;
      DatabaseReference mDatabaseLike ;
+     DatabaseReference mDatabasedisLike ;
      FirebaseAuth mAuth;
+     TextView nbrelike ;
+     TextView nbredislike ;
      public BlogViewHolder(View itemView) {
 
          super(itemView);
          mView = itemView;
+         nbredislike=(TextView)mView.findViewById(R.id.textdislike);
+
+         nbrelike=(TextView)mView.findViewById(R.id.nombrelike);
           post_title=(TextView)mView.findViewById(R.id.post_title);
          mlikebtn =(ImageButton)mView.findViewById(R.id.mlikebtn);
+         mdislikebtn1 =(ImageButton)mView.findViewById(R.id.mdislikebtn);
          mDatabaseLike=  FirebaseDatabase.getInstance().getReference().child("Likes");
+         mDatabasedisLike=  FirebaseDatabase.getInstance().getReference().child("dislike");
+
          mAuth=FirebaseAuth.getInstance();
          mDatabaseLike.keepSynced(true);
-
+         mDatabasedisLike.keepSynced(true);
          post_title.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -183,12 +249,41 @@ View mView ; TextView post_title;
          mDatabaseLike.addValueEventListener(new ValueEventListener() {
              @Override
              public void onDataChange(DataSnapshot dataSnapshot) {
-            if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
-              mlikebtn.setImageResource(R.drawable.ic_thumb_up_white_24dp);
+            if(dataSnapshot.child("1").child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+              mlikebtn.setImageResource(R.drawable.ic_thumb_up_red_24dp);
+
 
             }else {
                 mlikebtn.setImageResource(R.drawable.ic_thumb_up_black_24dp);
             }
+
+                 long x= dataSnapshot.child("1").child(post_key).getChildrenCount();
+                 nbrelike.setText(x+"");
+             }
+
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         });
+
+
+     }
+     public void setdislikebtn(final String post_key1){
+         mDatabaseLike.addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 if(dataSnapshot.child("2").child(post_key1).hasChild(mAuth.getCurrentUser().getUid())){
+                     mdislikebtn1.setImageResource(R.drawable.ic_thumb_down_red_24dp);
+                     long x= dataSnapshot.child("2").child(post_key1).getChildrenCount();
+                     nbredislike.setText(x+"");
+
+
+                 }else {
+                     mdislikebtn1.setImageResource(R.drawable.ic_thumb_down_black_24dp);
+                     long x= dataSnapshot.child("2").child(post_key1).getChildrenCount();
+                     nbredislike.setText(x+"");
+                 }
 
 
              }
@@ -233,7 +328,10 @@ if (item.getItemId() == R.id.action_add){
         else if(item.getItemId() ==  log){
     logout();
         }
-
+       else {
+    Intent i =new Intent(MainActivity.this,SetupActivity.class);
+    startActivity(i);
+       }
         return super.onOptionsItemSelected(item);
     }
 

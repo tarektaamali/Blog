@@ -33,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-private EditText loginemail;
+    private EditText loginemail;
     private EditText loginpassword ;
     private  TextView newuser;
     private Button loginBtn ;
@@ -58,11 +58,11 @@ private EditText loginemail;
         loginpassword=(EditText)findViewById(R.id.loginPasswordEmailField);
         newuser=(TextView) findViewById(R.id.TxtnewUser);
         mgoogleBtn=(SignInButton)findViewById(R.id.googlebtn);
-loginBtn =(Button) findViewById(R.id.loginBtn);
+        loginBtn =(Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               checkLogin();
+                checkLogin();
             }
         });
 
@@ -119,7 +119,7 @@ loginBtn =(Button) findViewById(R.id.loginBtn);
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
-            mProgress.dismiss();
+                mProgress.dismiss();
             }
         }
     }
@@ -143,7 +143,7 @@ loginBtn =(Button) findViewById(R.id.loginBtn);
                         }
                         else {
                             mProgress.dismiss();
-                         CheckUserExist();
+                            CheckUserExist();
                         }
                         // ...
                     }
@@ -159,47 +159,47 @@ loginBtn =(Button) findViewById(R.id.loginBtn);
         if(!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(password)){
             mProgress.setMessage("checking login ...");
             mProgress.show();
-          mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-              @Override
-              public void onComplete(@NonNull Task<AuthResult> task) {
-                  if(task.isSuccessful()){
-                      mProgress.dismiss();
-                    CheckUserExist();
-                  }else {
-                      mProgress.dismiss();
-                      Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                  }
-              }
-          });
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        mProgress.dismiss();
+                        CheckUserExist();
+                    }else {
+                        mProgress.dismiss();
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
     private void CheckUserExist() {
         if(mAuth.getCurrentUser() != null){
-    final String user_id=mAuth.getCurrentUser().getUid();
-        mDatabaseUsers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                  if (dataSnapshot.hasChild(user_id)){
-                          Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                      i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final String user_id=mAuth.getCurrentUser().getUid();
+            mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChild(user_id)){
+                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                      startActivity(i);
+                        startActivity(i);
 
-                  }else{
-                      Intent i = new Intent(LoginActivity.this,SetupActivity.class);
-                      i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    }else{
+                        Intent i = new Intent(LoginActivity.this,SetupActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                      startActivity(i);
-                      Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
 
-            }}
+                    }}
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
-    }}
+        }}
 }

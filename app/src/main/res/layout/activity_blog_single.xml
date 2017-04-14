@@ -5,6 +5,8 @@
     android:id="@+id/activity_blog_single"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:padding="10dp"
     tools:context="com.teamwinnner.android.blog.BlogSingleActivity">
 
     <ScrollView
@@ -19,17 +21,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="TextView"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_title" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_title"
+                android:layout_weight="1"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_user"
+                android:layout_weight="1"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/add_btn"
             android:id="@+id/post_image"
+
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
@@ -37,16 +56,13 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:inputType="textMultiLine"
             android:id="@+id/post_desc" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="285dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_user" />
 
         <Button
             android:text="Delete"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mSingleBtn"

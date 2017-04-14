@@ -37,7 +37,6 @@ public class BlogSingleActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         Bundle b =getIntent().getExtras();
         final String mpost_key=b.getString("blog_id");
-        Toast.makeText(getApplication(),mpost_key,Toast.LENGTH_SHORT).show();
 
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Blog");
   mdatabase.child(mpost_key).addValueEventListener(new ValueEventListener() {
