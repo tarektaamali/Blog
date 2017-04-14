@@ -25,6 +25,7 @@ public class BlogSingleActivity extends AppCompatActivity {
     private TextView bpost_title ,bpost_desc,bpost_username;
     private Button BtnRemove;
     private FirebaseAuth  mAuth;
+    String post_uid ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class BlogSingleActivity extends AppCompatActivity {
       bpost_image=(ImageView)findViewById(R.id.post_image);
         bpost_title=(TextView)findViewById(R.id.post_title);
         bpost_desc=(TextView)findViewById(R.id.post_desc);
-        bpost_username=(TextView)findViewById(R.id.post_username);
+        bpost_username=(TextView)findViewById(R.id.post_user);
         BtnRemove=(Button)findViewById(R.id.mSingleBtn);
         mAuth=FirebaseAuth.getInstance();
         Bundle b =getIntent().getExtras();
@@ -45,10 +46,12 @@ public class BlogSingleActivity extends AppCompatActivity {
             String post_title=(String) dataSnapshot.child("title").getValue();
                String post_desc=(String) dataSnapshot.child("desc").getValue();
                String post_image=(String) dataSnapshot.child("image").getValue();
-               String post_uid=(String) dataSnapshot.child("uid").getValue();
+               post_uid=(String) dataSnapshot.child("uid").getValue();
+               String post_user=(String) dataSnapshot.child("username").getValue();
+
                bpost_title.setText(post_title);
                bpost_desc.setText(post_desc);
-
+               bpost_username.setText(post_user);
      Picasso.with(BlogSingleActivity.this).load(post_image).into(bpost_image);
                if(mAuth.getCurrentUser().getUid() .equals(post_uid)){
                    BtnRemove.setVisibility(View.VISIBLE);
@@ -70,7 +73,16 @@ public class BlogSingleActivity extends AppCompatActivity {
             }
         });
 
-
+        bpost_username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String a=post_uid;
+                Intent env= new Intent(BlogSingleActivity.this,ProfileActivity.class);
+                env.putExtra("1",a);
+                env.putExtra("x",false);
+                startActivity(env);
+            }
+        });
 
     }
 }

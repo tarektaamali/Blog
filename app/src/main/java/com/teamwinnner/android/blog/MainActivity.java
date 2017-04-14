@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import static android.R.attr.x;
 import static com.teamwinnner.android.blog.R.id.log;
+import static com.teamwinnner.android.blog.R.id.profile;
 
 public class MainActivity extends AppCompatActivity {
 private RecyclerView mbloglist;
@@ -301,7 +302,12 @@ View mView ; TextView post_title;
     }
      public void setDesc(String  txtdesc){
          TextView post_desc=(TextView)mView.findViewById(R.id.post_desc);
-         post_desc.setText(txtdesc);
+         String a =txtdesc;
+         if(a.length()>80){
+            a= txtdesc.substring(0, 100);
+             a=a+".... lire la suite";
+         }
+         post_desc.setText(a);
      }
      public void setImage(Context ctx, String image){
          ImageView post_image=(ImageView)mView.findViewById(R.id.post_image);
@@ -328,6 +334,12 @@ if (item.getItemId() == R.id.action_add){
         else if(item.getItemId() ==  log){
     logout();
         }
+else if(item.getItemId()== profile){
+    Intent i =new Intent(MainActivity.this,ProfileActivity .class);
+    i.putExtra("x",true);
+
+    startActivity(i);
+}
        else {
     Intent i =new Intent(MainActivity.this,SetupActivity.class);
     startActivity(i);

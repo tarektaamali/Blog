@@ -108,7 +108,6 @@ private ImageButton mSelectImage;
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
                             }
                         });
 

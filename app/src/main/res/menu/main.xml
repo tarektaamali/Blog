@@ -10,8 +10,14 @@
         android:title="setting"
         app:showAsAction="never"
         />
+    <item android:id="@+id/profile"
+        android:title="VIEW ME"
+        app:showAsAction="never"
+        />
+
     <item android:id="@+id/log"
         android:title="logout"
         app:showAsAction="never"
         />
+
 </menu>
