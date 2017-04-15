@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
  */
 
 public class SimpleBlog extends Application {
-    @Override
+
     public  void onCreate(){
         super.onCreate();
         /*

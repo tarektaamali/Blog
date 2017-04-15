@@ -47,6 +47,8 @@ private ImageButton mSelectImage;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        getSupportActionBar().setTitle("Publier Article ");
+
         mAuth=FirebaseAuth.getInstance();
         mCurrentuser=mAuth.getCurrentUser();
         mStorageRef = FirebaseStorage.getInstance().getReference();

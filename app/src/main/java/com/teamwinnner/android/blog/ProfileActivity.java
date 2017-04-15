@@ -25,7 +25,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-           imagprofile=(ImageView)findViewById(R.id.imageViewprofile) ;
+        getSupportActionBar().setTitle("Profile ");
+
+        imagprofile=(ImageView)findViewById(R.id.imageViewprofile) ;
         nameuser=(TextView)findViewById(R.id.nametxt);
         mAuth=FirebaseAuth.getInstance();
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Users");

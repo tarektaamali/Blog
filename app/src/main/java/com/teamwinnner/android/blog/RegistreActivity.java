@@ -29,6 +29,8 @@ public class RegistreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registre);
+        getSupportActionBar().setTitle("Sign  up ");
+
         txt=(TextView)findViewById(R.id.textView);
         mNameField=(EditText)findViewById(R.id.nameField);
         mEmailField=(EditText)findViewById(R.id.emailField);

@@ -30,7 +30,9 @@ public class BlogSingleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_single);
-      bpost_image=(ImageView)findViewById(R.id.post_image);
+        getSupportActionBar().setTitle("Article ");
+
+        bpost_image=(ImageView)findViewById(R.id.post_image);
         bpost_title=(TextView)findViewById(R.id.post_title);
         bpost_desc=(TextView)findViewById(R.id.post_desc);
         bpost_username=(TextView)findViewById(R.id.post_user);

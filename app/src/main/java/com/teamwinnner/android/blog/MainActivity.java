@@ -50,6 +50,7 @@ private RecyclerView mbloglist;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Home ");
         mbloglist=(RecyclerView)findViewById(R.id.blog_list) ;
         mbloglist.setHasFixedSize(true);
         mbloglist.setLayoutManager(new LinearLayoutManager(this));
